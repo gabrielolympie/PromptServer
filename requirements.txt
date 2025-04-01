@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-dotenv
+python-multipart
+requests
+pydantic==2.8.2
+pydantic-settings
+bcrypt
+passlib
+unidecode
+mirascope[tenacity]
+openai
+litellm
+logfire

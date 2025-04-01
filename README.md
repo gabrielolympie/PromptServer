@@ -1,6 +1,6 @@
 # Prompt Server
 
-A FastAPI server that turns markdown prompt files into API endpoints with minimal configuration.
+A FastAPI server that simply serve prompts, no code required.
 
 ## Why Prompt Server?
 

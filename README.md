@@ -1,3 +1,10 @@
+## UPDATE IN PROGRESS (et 12/07/2025):
+- recursive tool use intégration
+- openapi documentation
+- rate limiting
+- logfire seamless integration
+- tags in logging system for observability
+
 # Prompt Server
 
 A FastAPI server that simply serve prompts, no code required.

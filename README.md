@@ -2,6 +2,7 @@
 - recursive tool use intégration
 - openapi documentation
 - rate limiting
+- temporally signed bearer token security
 - logfire seamless integration
 - tags in logging system for observability
 

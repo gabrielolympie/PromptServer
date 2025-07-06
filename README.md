@@ -1,4 +1,4 @@
-## UPDATE IN PROGRESS (et 12/07/2025):
+## UPDATE IN PROGRESS (ETA 12/07/2025):
 - recursive tool use intégration
 - openapi documentation
 - rate limiting

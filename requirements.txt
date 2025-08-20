@@ -12,3 +12,6 @@ mirascope[tenacity]
 openai
 litellm
 logfire
+fastapi-limiter
+joblib
+meilisearch

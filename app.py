@@ -1,32 +1,36 @@
-from fastapi import FastAPI, APIRouter
-from src.mirascope import create_prompt_route
-from dotenv import load_dotenv
-from pathlib import Path
-import os
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from fastapi import FastAPI
+
+# import redis.asyncio as redis
+import dotenv
+dotenv.load_dotenv()
+
+# from fastapi_limiter import FastAPILimiter
+
+from api.prompts import prompt_router
 
 app = FastAPI()
-router = APIRouter()
-load_dotenv()
 
-def setup_prompt_routes():
-    prompts_dir = Path(os.environ['PROMPT_PATH'])
-    
-    if not prompts_dir.exists():
-        raise FileNotFoundError(f"Prompts directory not found at {prompts_dir.absolute()}")
-    
-    for prompt_file in prompts_dir.rglob("*.md"):
-        relative_path = prompt_file.relative_to(prompts_dir)
-        route_path = f"/{os.environ['APPLICATION_NAME']}/{relative_path.with_suffix('')}"
-        create_prompt_route(
-            router=router,
-            prompt_path=str(prompt_file),
-            route_path=route_path
-        )
-    
-    app.include_router(router)
+## Rate limiting based on IP address, uses a local non persistent redis server
+# @app.on_event("startup")
+# async def startup():
+#     redis_connection = redis.from_url("redis://localhost:3500", encoding="utf-8", decode_responses=True)
+#     await FastAPILimiter.init(redis_connection)
 
-setup_prompt_routes()
+# Add middleware to handle CORS policy (to be adapted once we know the origins)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins
+    allow_credentials=True,  # Allow credentials
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
+
+app.include_router(prompt_router)  ## include prompt router
 
 if __name__ == "__main__":
+    # Run the FastAPI application using uvicorn
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=os.environ['PORT'])
+
+    uvicorn.run(app, host="0.0.0.0", port=8080)  # Run the app on the specified port

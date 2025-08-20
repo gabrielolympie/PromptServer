@@ -1,1 +1,10 @@
-.env
+*.env
+*.envdocker
+**_pycache__*
+*.rdb
+
+meilisearch/meilisearch_binary
+meilisearch/data*
+meilisearch/dumps*
+
+*ipynb_checkpoints*

@@ -1,12 +1,4 @@
-## UPDATE IN PROGRESS (ETA 12/07/2025):
-- recursive tool use intégration
-- openapi documentation
-- rate limiting
-- temporally signed bearer token security
-- logfire seamless integration
-- tags in logging system for observability
-
-# Prompt Server
+# Prompt Server (V1.0.0)
 
 A FastAPI server that simply serve prompts, no code required.
 
@@ -26,6 +18,10 @@ A FastAPI server that simply serve prompts, no code required.
 - **Automatic routing**: Prompt file paths become API endpoints automatically
 - **Retry & fallback**: Built-in retry logic and fallback model support
 - **Docker-ready**: Easy containerization for deployment
+- **Recursive Tool Use**: Capability to define tools in pure python, and call them with streaming.
+- **Native Client**: A native python client to help leverage the services
+- **Retrieval**: A meilisearch server embed with it
+- **Observability**: Logfire is natively embedded for monitoring
 
 ## Supported Modalities (April 2025)
 
@@ -53,7 +49,7 @@ A FastAPI server that simply serve prompts, no code required.
 
 2. **Install dependencies**:
    ```bash
-   pip install -r requirements.txt
+   uv pip install -r requirements.txt
    ```
 
 3. **Run the server**:
@@ -66,8 +62,12 @@ A FastAPI server that simply serve prompts, no code required.
 
 ### Docker Installation
 ```bash
+cp .envdocker.example .envdocker
+```
+
+```bash
 docker build -t prompt-server .
-docker run -p 8080:8080 --env-file .env prompt-server
+docker run -p 8080:8080 --env-file .envdocker prompt-server
 ```
 
 ## Defining Prompts
@@ -75,61 +75,8 @@ docker run -p 8080:8080 --env-file .env prompt-server
 Create markdown files in the `prompts/` directory (configurable via `PROMPT_PATH` in `.env`).
 
 ### Prompt File Structure
-````markdown
-```yaml
-# Configuration (YAML frontmatter)
-call:
-  model: gemini-1.5-flash-8b
-  stream: true
-  json_mode: false
-  tools: []
-  call_params:
-    temperature: 0.3
-    top_p: 0.95
-retry: 3
-fallback: os.environ['FALLBACK_MODEL']
-parse_objects: true
-```
-
-## PROMPTFILE
-
-SYSTEM:
-You are a helpful assistant
-
----
-
-MESSAGES:
-
-{history}
-
----
-
-ASSISTANT:
-
-OK
-
----
-
-USER:
-
-##### TASK
-
-Describe the following image:
-{image:image}
-
-##### OUTPUT
-
-First write a free form description, then provide structured YAML:
-
-###### DESCRIPTION
-[Your description here]
-
-###### YAML DESCRIPTION
-```yaml
-subject: [main subject]
-context: [image context]
-```
-````
+Start the server and call the prompts/readme route to check that.
+You can also follow the get started notebook to understand key concepts and behaviors.
 
 The file path determines the API endpoint. For example:
 - `prompts/chat.md` → `/prompt_server/chat`

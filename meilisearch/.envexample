@@ -1,0 +1,3 @@
+## MEILISEARCH
+export MEILI_HTTP_ADDR="localhost:7700"
+export MEILI_MASTER_KEY="your_master_key_here"

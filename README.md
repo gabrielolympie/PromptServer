@@ -35,6 +35,8 @@ A FastAPI server that simply serve prompts, no code required.
 
 ## Getting Started
 
+To get started with Prompt Server, please refer to our [Get_Started.ipynb](https://github.com/gabrielolympie/PromptServer/blob/main/Get_Started.ipynb) notebook in the repo, which provides a step-by-step guide on how to set up and use the server.
+
 ### Prerequisites
 - Python 3.8+
 - API keys for your desired LLM providers
@@ -61,14 +63,17 @@ A FastAPI server that simply serve prompts, no code required.
     Navigate to http://localhost:8080/docs (port might changed based on your env) to see your routes.
 
 ### Docker Installation
-```bash
-cp .envdocker.example .envdocker
-```
+1. **Configure environment**:
+   ```bash
+   cp .env.example .env
+   ```
+   Edit `.env` with your API keys and settings.
 
-```bash
-docker build -t prompt-server .
-docker run -p 8080:8080 --env-file .envdocker prompt-server
-```
+1. **Run docker**:
+   ```bash
+   docker build -t prompt-server .
+   docker run -p 8080:8080 prompt-server
+   ```
 
 ## Defining Prompts
 

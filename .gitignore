@@ -7,4 +7,6 @@ meilisearch/meilisearch_binary
 meilisearch/data*
 meilisearch/dumps*
 
+prompts/private*
+
 *ipynb_checkpoints*

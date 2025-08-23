@@ -1,7 +1,7 @@
 ```yaml
 description: "Readme prompt, enables to vulgarize what prompt files are"
 call:
-  model: os.environ['GENERAL_PURPOSE_MODEL']
+  model: openai/gpt-4
   stream: True
   json_mode: False
   tools: []
